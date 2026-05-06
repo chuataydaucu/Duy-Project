@@ -11,7 +11,8 @@ function App() {
   const [books, setBooks] = useState([])
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState([]);
-
+//chua tay dau cin cho
+// maay cin cho
   useEffect(() => {
     // Đổi link từ /stories thành /books
     axios.get('http://localhost:3001/books')
