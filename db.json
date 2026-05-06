@@ -1,0 +1,10 @@
+{
+  "books": [
+    { "id": "1", "name": "Đắc Nhân Tâm", "author": "Dale Carnegie", "price": 85000, "oldPrice": 120000, "image": "https://picsum.photos/seed/book1/400/600", "category": "Kỹ năng sống", "description": "Cuốn sách có sức lan tỏa nhất mọi thời đại." },
+    { "id": "2", "name": "Nhà Giả Kim", "author": "Paulo Coelho", "price": 65000, "oldPrice": 79000, "image": "https://picsum.photos/seed/book2/400/600", "category": "Văn học", "description": "Hành trình đi tìm vận mệnh của mỗi người." },
+    { "id": "3", "name": "Atomic Habits", "author": "James Clear", "price": 145000, "oldPrice": 180000, "image": "https://picsum.photos/seed/book3/400/600", "category": "Kỹ năng sống", "description": "Thay đổi nhỏ, kết quả lớn." },
+    { "id": "4", "name": "Cha Giàu Cha Nghèo", "author": "Robert Kiyosaki", "price": 95000, "oldPrice": 115000, "image": "https://picsum.photos/seed/book4/400/600", "category": "Kinh tế", "description": "Bài học về tiền bạc mà người giàu dạy con." },
+    { "id": "5", "name": "Tôi Thấy Hoa Vàng Trên Cỏ Xanh", "author": "Nguyễn Nhật Ánh", "price": 110000, "oldPrice": 125000, "image": "https://picsum.photos/seed/book5/400/600", "category": "Văn học", "description": "Một vé đi tuổi thơ rực rỡ." },
+    { "id": "6", "name": "Sapiens: Lược Sử Loài Người", "author": "Yuval Noah Harari", "price": 185000, "oldPrice": 220000, "image": "https://picsum.photos/seed/book6/400/600", "category": "Khoa học", "description": "Nhìn lại hành trình của nhân loại." }
+  ]
+}
