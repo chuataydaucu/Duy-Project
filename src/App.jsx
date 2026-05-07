@@ -4,6 +4,12 @@ import Header from './components/Header'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DetailPage from './pages/DetailPage';
 import { Link } from 'react-router-dom';
+import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import OrdersHistory from './pages/OrdersHistory';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Admin from './pages/Admin';
 
 function App() {
   const categories = ["Tất cả", "Kỹ năng sống", "Văn học", "Kinh tế", "Khoa học"];
@@ -11,8 +17,12 @@ function App() {
   const [books, setBooks] = useState([])
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState([]);
+  // Khai báo state để quản lý thông tin người dùng đăng nhập
+  const [userAuth, setUserAuth] = useState(null);
 
   useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) setUserAuth(JSON.parse(savedUser));
     // Đổi link từ /stories thành /books
     axios.get('http://localhost:3001/books')
       .then(res => setBooks(res.data))
@@ -33,6 +43,20 @@ function App() {
     }
     alert(`Đã thêm "${book.name}" vào giỏ hàng!`);
   };
+  
+  const handleLogout = () => {
+    if (window.confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
+      // 1. Xóa trong bộ nhớ trình duyệt
+      localStorage.removeItem('user');
+      
+      // 2. Xóa trong State của React để giao diện cập nhật ngay lập tức
+      setUserAuth(null);
+      
+      // 3. Đưa người dùng về trang chủ
+      window.location.href = '/'; 
+    }
+  };
+
   return (
     <BrowserRouter>
       {/* [Bản đồ bắt đầu từ đây] */}
@@ -42,13 +66,15 @@ function App() {
           searchTerm={searchTerm} 
           setSearchTerm={setSearchTerm} 
           cartCount={cart.length} // Truyền số lượng loại sách trong giỏ
+          userAuth={userAuth} 
+          handleLogout={handleLogout}
         />
         <Routes> {/* [Đây là nơi quyết định trang nào sẽ hiện ra] */}
           <Route path="/" element={
             <main className="container mx-auto px-4 py-10">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 border-l-8 border-orange-500 pl-4">
-                  Sách mới nổi bật
+                  TRANG CHỦ
                 </h2>
               </div>
               {/* Thanh bộ lọc thể loại */}
@@ -120,6 +146,12 @@ function App() {
           } />
           {/* [TRANG CHI TIẾT: Khi vào đường dẫn /book/id sẽ hiện trang này] */}
           <Route path="/book/:id" element={<DetailPage addToCart={addToCart} />} />
+          <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
+          <Route path="/checkout" element={<CheckoutPage cart={cart} setCart={setCart} />} />
+          <Route path="/my-orders" element={<OrdersHistory />} />
+          <Route path="/login" element={<Login setUserAuth={setUserAuth} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
     </BrowserRouter>
