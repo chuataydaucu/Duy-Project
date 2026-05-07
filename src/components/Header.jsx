@@ -5,9 +5,11 @@ function Header({ searchTerm, setSearchTerm, cartCount, userAuth, handleLogout }
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
         {/* Logo */}
-        <h1 className="text-2xl font-black text-orange-600 tracking-tighter cursor-pointer">
-          TAYF<span className="text-slate-800">BOOKS</span>
-        </h1>
+        <Link to="/">
+          <h1 className="text-2xl font-black text-orange-600 tracking-tighter cursor-pointer">
+            TAYF<span className="text-slate-800">BOOKS</span>
+          </h1>
+        </Link>
         
         {/* Search Bar - Thêm mới ở đây */}
         <div className="flex-1 max-w-md mx-4">
@@ -22,13 +24,6 @@ function Header({ searchTerm, setSearchTerm, cartCount, userAuth, handleLogout }
             <span className="absolute right-4 top-2 text-gray-400">🔍</span>
           </div>
         </div>
-        <Link 
-          to="/my-orders" 
-          className="text-gray-600 hover:text-orange-500 font-medium text-sm transition-colors"
-        >
-          Lịch sử đơn
-        </Link>
-
         {/* Navigation & Cart */}
         <div className="flex items-center gap-6">
           <Link to="/cart" className="relative cursor-pointer group">
@@ -44,12 +39,16 @@ function Header({ searchTerm, setSearchTerm, cartCount, userAuth, handleLogout }
               {/* Chèn logic này vào */}
               {userAuth ? (
                 <div className="flex items-center gap-3 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
-                  <span className="text-sm font-medium text-gray-700">
+                  {/* Nút bấm thông minh dựa trên Role */}
+                  <Link 
+                    to={userAuth.role === 'admin' ? "/admin" : "/profile"} 
+                    className="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors"
+                  >
                     Chào, <b className="text-orange-500">{userAuth.name}</b>
-                  </span>
+                  </Link>
                   <button 
                     onClick={handleLogout}
-                    className="text-gray-400 hover:text-red-500 text-xs font-bold transition-colors border-l pl-3 ml-1"
+                    className="text-gray-400 hover:text-red-500 text-xs font-bold border-l pl-3 ml-1"
                   >
                     Đăng Xuất
                   </button>

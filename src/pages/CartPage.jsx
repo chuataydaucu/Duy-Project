@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function CartPage({ cart, setCart }) {
+function CartPage({ cart, setCart, userAuth }) {
     const navigate = useNavigate();
   // Hàm tăng số lượng
   const increaseQty = (id) => {
@@ -34,6 +35,19 @@ function CartPage({ cart, setCart }) {
       </div>
     );
   }
+
+  const handleCheckout = () => {
+    // 1. Kiểm tra xem người dùng đã đăng nhập chưa
+    if (!userAuth) {
+      alert("Vui lòng đăng nhập để tiếp tục thanh toán!");
+      navigate('/login'); // Chuyển hướng sang trang login nếu chưa đăng nhập
+      return;
+    }
+
+    // 2. Nếu đã đăng nhập, chỉ cần chuyển hướng sang trang Checkout
+    // Chúng ta không gọi axios.post ở đây nữa mà để trang Checkout xử lý
+    navigate('/checkout');
+  };
 
   return (
     <div className="container mx-auto px-4 py-10">
@@ -71,8 +85,11 @@ function CartPage({ cart, setCart }) {
               <span>Tổng cộng:</span>
               <span className="text-red-600">{totalPrice.toLocaleString()}đ</span>
             </div>
-            <button onClick={() => navigate('/checkout')} className="w-full bg-red-800 text-white rounded-full">
-            TIẾN HÀNH THANH TOÁN
+            <button 
+              onClick={handleCheckout}
+              className="w-full bg-orange-500 text-white py-3 rounded-xl font-bold mt-4 hover:bg-orange-600 transition-all"
+            >
+              THANH TOÁN NGAY
             </button>
           </div>
         </div>

@@ -1,0 +1,61 @@
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #1e293b; /* Màu xanh đậm slate-800 */
+  color: white;
+  position: fixed;
+  height: 100vh;
+  padding: 20px 0;
+}
+
+.admin-content {
+  margin-left: 260px; /* Đẩy nội dung sang phải để không bị Sidebar đè */
+  flex: 1;
+  background-color: #f8fafc;
+  padding: 30px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  color: #cbd5e1;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+  background-color: #334155;
+  color: white;
+  border-left: 4px solid #f97316; /* Viền cam thương hiệu TayfBooks */
+}
+
+
+/* Thiết lập khung layout Admin */
+.admin-container {
+  display: flex; /* Kích hoạt flexbox để Sidebar và Content nằm ngang */
+  min-height: 100vh;
+}
+
+/* Sidebar bên trái */
+.sidebar {
+  width: 260px;
+  background-color: #1e293b; /* Màu xanh đen chuyên nghiệp */
+  height: 100vh;
+  position: fixed; /* Cố định sidebar khi cuộn nội dung */
+  top: 0;
+  left: 0;
+}
+
+/* Vùng nội dung bên phải */
+.admin-content {
+  margin-left: 260px; /* Đẩy nội dung sang phải một khoảng đúng bằng chiều rộng sidebar */
+  flex: 1;
+  padding: 30px;
+  background-color: #f8fafc; /* Màu nền xám nhạt cho sạch sẽ */
+  min-height: 100vh;
+}

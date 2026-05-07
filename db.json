@@ -1,4 +1,18 @@
 {
+  "categories": [
+    {
+      "id": "1",
+      "name": "Kinh tế"
+    },
+    {
+      "id": "2",
+      "name": "Kỹ năng"
+    },
+    {
+      "id": "3",
+      "name": "Văn học"
+    }
+  ],
   "books": [
     {
       "id": "1",
@@ -59,9 +73,46 @@
       "image": "https://picsum.photos/seed/book6/400/600",
       "category": "Khoa học",
       "description": "Nhìn lại hành trình của nhân loại."
+    },
+    {
+      "name": "OnePiece",
+      "author": "Odaa",
+      "price": 100000,
+      "oldPrice": 5000000,
+      "image": "https://m.media-amazon.com/images/M/MV5BMTNjNGU4NTUtYmVjMy00YjRiLTkxMWUtNzZkMDNiYjZhNmViXkEyXkFqcGc@._V1_.jpg",
+      "category": "Kỹ năng",
+      "description": "hi",
+      "id": "dn_zVlGCj4M"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "userId": "1",
+      "customer": {
+        "name": "Quản trị viên",
+        "email": "admin@gmail.com",
+        "phone": "svsd",
+        "address": "vsvv"
+      },
+      "items": [
+        {
+          "id": "3",
+          "name": "Atomic Habits",
+          "author": "James Clear",
+          "price": 145000,
+          "oldPrice": 180000,
+          "image": "https://picsum.photos/seed/book3/400/600",
+          "category": "Kỹ năng sống",
+          "description": "Thay đổi nhỏ, kết quả lớn.",
+          "quantity": 1
+        }
+      ],
+      "total": 145000,
+      "date": "23:01:20 7/5/2026",
+      "status": "Chờ xác nhận",
+      "id": "6a8KDtOfCrc"
+    }
+  ],
   "users": [
     {
       "id": "1",
@@ -69,13 +120,6 @@
       "password": "123",
       "name": "Quản trị viên",
       "role": "admin"
-    },
-    {
-      "name": "duy",
-      "email": "duy@gmail.com",
-      "password": "1",
-      "role": "customer",
-      "id": "mJYRQZKeYzM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

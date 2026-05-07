@@ -10,6 +10,8 @@ import OrdersHistory from './pages/OrdersHistory';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
+import Profile from './pages/Profile';
+import AdminOrders from './pages/AdminOrders';
 
 function App() {
   const categories = ["Tất cả", "Kỹ năng sống", "Văn học", "Kinh tế", "Khoa học"];
@@ -125,7 +127,7 @@ function App() {
                           {book.name}
                         </h3>
                       </Link>
-                      <p className="text-xs text-gray-500 mb-3">tg: {book.author}</p>
+                      <p className="text-xs text-gray-500 mb-3">Tác Giả: {book.author}</p>
                       
                       <div className="flex items-end gap-2 mb-4">
                         <span className="text-lg font-bold text-red-600">{book.price.toLocaleString()}đ</span>
@@ -146,12 +148,14 @@ function App() {
           } />
           {/* [TRANG CHI TIẾT: Khi vào đường dẫn /book/id sẽ hiện trang này] */}
           <Route path="/book/:id" element={<DetailPage addToCart={addToCart} />} />
-          <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
-          <Route path="/checkout" element={<CheckoutPage cart={cart} setCart={setCart} />} />
+          <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} userAuth={userAuth} />} />
+          <Route path="/checkout" element={<CheckoutPage cart={cart} setCart={setCart} userAuth={userAuth} />} />
           <Route path="/my-orders" element={<OrdersHistory />} />
           <Route path="/login" element={<Login setUserAuth={setUserAuth} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/profile" element={<Profile userAuth={userAuth} />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
         </Routes>
       </div>
     </BrowserRouter>
