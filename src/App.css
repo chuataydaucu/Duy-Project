@@ -1,0 +1,47 @@
+/* Layout tổng cho Admin */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fafc; /* Màu nền xám nhạt cho vùng nội dung */
+}
+
+/* Sidebar cố định bên trái */
+.sidebar {
+  width: 260px;
+  position: fixed; /* Giữ menu đứng yên */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+}
+
+/* Vùng nội dung phải lùi sang để không bị đè */
+.admin-content {
+  margin-left: 260px; 
+  flex: 1;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Đảm bảo khung Admin bao trùm toàn màn hình */
+.admin-container {
+  display: flex !important;
+  background-color: #f8fafc;
+}
+
+.admin-content {
+  margin-left: 260px !important; /* Phải khớp với chiều rộng Sidebar */
+  flex: 1;
+  padding: 40px;
+  min-height: 100vh;
+}
+
+/* Hiệu ứng mượt cho Modal */
+.fixed {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
