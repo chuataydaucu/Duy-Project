@@ -7,7 +7,17 @@ function CartPage({ cart, setCart, userAuth }) {
     const navigate = useNavigate();
   // Hàm tăng số lượng
   const increaseQty = (id) => {
-    setCart(cart.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item));
+    setCart(cart.map(item => {
+      if (item.id === id) {
+        // Kiểm tra nếu số lượng hiện tại đã chạm mốc tồn kho chưa
+        if (item.quantity >= Number(item.stock)) {
+          alert(`Rất tiếc, cuốn "${item.name}" trong kho chỉ còn ${item.stock} cuốn!`);
+          return item; // Trả về item cũ, không tăng nữa
+        }
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    }));
   };
 
   // Hàm giảm số lượng
@@ -23,7 +33,7 @@ function CartPage({ cart, setCart, userAuth }) {
       setCart(cart.filter(item => item.id !== id));
     }
   };
-
+  
   // Tính tổng tiền
   const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
@@ -62,10 +72,51 @@ function CartPage({ cart, setCart, userAuth }) {
               <div className="flex-1">
                 <h3 className="font-bold text-lg">{item.name}</h3>
                 <p className="text-red-600 font-bold">{item.price.toLocaleString()}đ</p>
-                <div className="flex items-center gap-3 mt-3">
-                  <button onClick={() => decreaseQty(item.id)} className="px-3 py-1 bg-gray-200 rounded">-</button>
-                  <span className="font-bold">{item.quantity}</span>
-                  <button onClick={() => increaseQty(item.id)} className="px-3 py-1 bg-gray-200 rounded">+</button>
+                {/* Bộ tăng giảm số lượng có Input và Check Stock */}
+                <div className="flex items-center gap-2 mt-3">
+                  <div className="flex items-center border rounded-lg overflow-hidden bg-gray-50">
+                    {/* Nút giảm [-] */}
+                    <button 
+                      onClick={() => decreaseQty(item.id)}
+                      className="px-3 py-1 hover:bg-gray-200 text-gray-600 transition-colors font-bold border-r"
+                    >
+                      -
+                    </button>
+
+                    {/* Ô Input nhập số lượng trực tiếp */}
+                    <input 
+                      type="number"
+                      value={item.quantity}
+                      min="1"
+                      className="w-12 text-center bg-transparent outline-none text-sm font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value);
+                        
+                        // 1. Chặn nếu gõ số lớn hơn tồn kho
+                        if (val > Number(item.stock)) {
+                          alert(`Trong kho chỉ còn ${item.stock} cuốn thôi Duy Anh ơi!`);
+                          setCart(cart.map(i => i.id === item.id ? { ...i, quantity: Number(item.stock) } : i));
+                        } 
+                        // 2. Chặn nếu gõ số âm hoặc bằng 0
+                        else if (val > 0) {
+                          setCart(cart.map(i => i.id === item.id ? { ...i, quantity: val } : i));
+                        }
+                      }}
+                    />
+
+                    {/* Nút tăng [+] */}
+                    <button 
+                      onClick={() => increaseQty(item.id)}
+                      className="px-3 py-1 hover:bg-gray-200 text-gray-600 transition-colors font-bold border-l"
+                    >
+                      +
+                    </button>
+                  </div>
+                  
+                  {/* Hiện nhắc nhở số lượng kho cho khách biết */}
+                  <span className="text-[10px] text-gray-400 italic">
+                    (Kho còn: {item.stock})
+                  </span>
                 </div>
               </div>
               <button onClick={() => removeFromCart(item.id)} className="text-gray-400 hover:text-red-500 text-2xl">×</button>

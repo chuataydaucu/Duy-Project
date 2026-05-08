@@ -6,15 +6,31 @@ function Register() {
   const [user, setUser] = useState({ name: "", email: "", password: "", role: 'customer' });
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post('http://localhost:3001/users', user)
-      .then(() => {
-        alert("Đăng ký thành công!");
-        navigate('/login');
-      })
-      .catch(err => console.error(err));
+  // Register.jsx
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  const newUser = {
+    // Giữ nguyên các thông tin đăng nhập
+    username: user.name, 
+    email: user.email,
+    password: user.password,
+    
+    // Các trường mặc định để đồng bộ với Admin Dashboard
+    role: "Customer",
+    status: "Active",
+    avatar: `https://i.pravatar.cc/150?u=${user.name}`,
+    createdAt: new Date().toLocaleDateString('vi-VN')
   };
+
+  try {
+    await axios.post("http://localhost:3001/users", newUser);
+    alert(`Chào mừng ${user.name} đã đăng ký thành công!`); // Hiển thị tên ngay thông báo
+    navigate("/login");
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <div className="max-w-md mx-auto my-20 p-8 bg-white rounded-2xl shadow-xl border">

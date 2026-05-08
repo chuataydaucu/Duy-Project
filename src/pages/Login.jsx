@@ -25,7 +25,7 @@ function Login({ setUserAuth }) {
         // ĐĂNG NHẬP THÀNH CÔNG
         localStorage.setItem('user', JSON.stringify(user));
         setUserAuth(user);
-        alert("Đăng nhập thành công! Chào " + user.name);
+        alert(`Đăng nhập thành công! Chào ${user.fullName || user.username || "bạn"}`);
         
         // Chuyển hướng
         if (user.role === 'admin') {

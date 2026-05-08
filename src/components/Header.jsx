@@ -12,17 +12,22 @@ function Header({ searchTerm, setSearchTerm, cartCount, userAuth, handleLogout }
         </Link>
         
         {/* Search Bar - Thêm mới ở đây */}
-        <div className="flex-1 max-w-md mx-4">
-          <div className="relative">
-            <input 
-              type="text" 
-              placeholder="Tìm kiếm sách bạn muốn..." 
-              value={searchTerm} // Gắn giá trị từ state
-              onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật state khi gõ
-              className="..." 
-            />
-            <span className="absolute right-4 top-2 text-gray-400">🔍</span>
+        <div className="relative w-full max-w-xl mx-auto">
+          {/* Icon kính lúp đặt ở bên trái */}
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
           </div>
+
+          {/* Ô input được bo tròn và đẩy chữ sang phải để tránh icon */}
+          <input
+            type="text"
+            placeholder="Tìm kiếm sách bạn muốn..."
+            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-full text-sm outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition-all shadow-sm"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
         {/* Navigation & Cart */}
         <div className="flex items-center gap-6">
@@ -44,7 +49,7 @@ function Header({ searchTerm, setSearchTerm, cartCount, userAuth, handleLogout }
                     to={userAuth.role === 'admin' ? "/admin" : "/profile"} 
                     className="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors"
                   >
-                    Chào, <b className="text-orange-500">{userAuth.name}</b>
+                    Chào, <b className="text-orange-500">{userAuth.username}</b>
                   </Link>
                   <button 
                     onClick={handleLogout}

@@ -21,16 +21,18 @@ function Profile({ userAuth }) {
 
     // Giữ nguyên dòng kiểm tra userAuth của bạn ở dưới
     if (!userAuth) return <div className="p-20 text-center text-red-500 font-bold">Vui lòng đăng nhập!</div>;
-
+    
     return (
         <div className="container mx-auto p-10 flex gap-8">
             {/* Cột trái: Thông tin cá nhân */}
             <div className="w-1/3 bg-white p-6 rounded-2xl shadow-sm border">
                 <div className="flex flex-col items-center mb-6">
                     <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-3xl font-bold text-orange-500 mb-4">
-                        {userAuth.name.charAt(0)}
+                        {userAuth?.name?.charAt(0)}
                     </div>
-                    <h2 className="text-xl font-bold">{userAuth.name}</h2>
+                    <h2 className="text-2xl font-bold mt-4">
+                        {userAuth?.fullName || userAuth?.username || "Người dùng TayfBooks"}
+                    </h2>
                     <p className="text-gray-500 text-sm">{userAuth.email}</p>
                 </div>
                 <div className="space-y-4 border-t pt-4">
